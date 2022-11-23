@@ -13,6 +13,8 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - ${TYPEORM_PORT}:${TYPEORM_PORT}
+    networks: 
+      - back
   backend:
     container_name: backend-nest
     build:
@@ -33,6 +35,9 @@ services:
       - NODEMAILER_HOST=${NODEMAILER_HOST}
       - NODEMAILER_PORT=${NODEMAILER_PORT}
       - NODEMAILER_USER=${NODEMAILER_USER}
+    networks: 
+      - front
+      - back
   frontend:
     container_name: frontend-react
     build:
@@ -43,3 +48,10 @@ services:
     restart: unless-stopped
     ports:
       - '8081:80'
+    networks: 
+      - front
+  networks:
+    front:
+      driver: bridge
+    back: 
+      driver: bridge
