@@ -50,8 +50,8 @@ services:
       - '8081:80'
     networks: 
       - front
-  networks:
-    front:
-      driver: bridge
-    back: 
-      driver: bridge
+networks:
+  front:
+    driver: bridge
+  back: 
+    driver: bridge
