@@ -1,6 +1,14 @@
 version: '3.9'
 
 services:
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks: 
+      - front
   db:
     container_name: postgres
     image: postgres:15-alpine
@@ -15,6 +23,7 @@ services:
       - ${TYPEORM_PORT}:${TYPEORM_PORT}
     networks: 
       - back
+ 
   backend:
     container_name: backend-nest
     build:
@@ -22,8 +31,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    ports:
-      - '4000:4000'
     environment:
       - TYPEORM_USERNAME=${TYPEORM_USERNAME}
       - TYPEORM_PASSWORD=${TYPEORM_PASSWORD}
@@ -38,18 +45,9 @@ services:
     networks: 
       - front
       - back
-  frontend:
-    container_name: frontend-react
-    build:
-      context: ./frontend
-    depends_on:
-      - db
-      - backend
-    restart: unless-stopped
     ports:
-      - '8081:80'
-    networks: 
-      - front
+      - 4000:4000
+
 networks:
   front:
     driver: bridge
