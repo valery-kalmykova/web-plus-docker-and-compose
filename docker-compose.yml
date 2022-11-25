@@ -20,7 +20,7 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
-      - ${TYPEORM_PORT}:${TYPEORM_PORT}
+      - ${DATABASE_PORT}:${DATABASE_PORT}
     networks: 
       - back
  
@@ -35,7 +35,7 @@ services:
       - TYPEORM_USERNAME=${TYPEORM_USERNAME}
       - TYPEORM_PASSWORD=${TYPEORM_PASSWORD}
       - TYPEORM_DATABASE=${TYPEORM_DATABASE}
-      - TYPEORM_PORT=${TYPEORM_PORT}
+      - TYPEORM_PORT=5432
       - TYPEORM_HOST=db
       - JWTKEY=${JWTKEY}
       - NODEMAILER_PASSWORD=${NODEMAILER_PASSWORD}
