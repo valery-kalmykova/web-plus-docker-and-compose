@@ -1,5 +1,5 @@
 # Докеризация приложения
-
-### IP адрес 51.250.107.148
-### Frontend https://vkalmykova.nomoredomains.club
-### Backend https://api.vkalmykova.nomoredomains.club
+git clone this repo
+docker pull nginx - download nhinx image first
+docker compose up -d
+open localhost:8081
